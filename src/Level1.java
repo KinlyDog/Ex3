@@ -18,7 +18,8 @@ public class Level1 {
         }
 
         double sq = Math.sqrt(n);
-        int x, y;
+        int x;
+        int y;
         int isq = (int) sq;
 
         if (sq == isq) {
