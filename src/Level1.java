@@ -1,5 +1,6 @@
 public class Level1 {
     public static String TheRabbitsFoot(String s, boolean encode) {
+        // removing spaces
         char[] ca = s.toCharArray();
         StringBuilder bld = new StringBuilder();
 
@@ -10,6 +11,7 @@ public class Level1 {
         }
         String str = bld.toString();
 
+        // string length
         int n;
         if (encode) {
             n = str.length();
@@ -17,11 +19,13 @@ public class Level1 {
             n = s.length();
         }
 
+        // sqrt for matrix length
         double sq = Math.sqrt(n);
         int x;
         int y;
         int isq = (int) sq;
 
+        // matrix size
         if (sq == isq) {
             x = y = isq;
         } else {
@@ -31,67 +35,57 @@ public class Level1 {
 
         if ((x * y) < n) x++;
 
+        // new matrix
         char[][] matrix = new char[x][y];
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[0].length; j++) {
+        for (int i = 0; i < x; i++) {
+            for (int j = 0; j < y; j++) {
                 matrix[i][j] = ' ';
             }
         }
 
         int t = 0;
-        StringBuilder bld2 = new StringBuilder();
+        for (int i = 0; i < x; i++) {
+            for (int j = 0; j < y; j++) {
+                // --- encode ---
+                if (t < n && encode) {
+                    matrix[i][j] = str.charAt(t);
+                    t++;
+                    continue;
 
-        if (encode) {
-            for (int i = 0; i < matrix.length; i++) {
-                for (int j = 0; j < matrix[0].length; j++) {
-                    if (t < n) {
-                        matrix[i][j] = str.charAt(t);
-                        t++;
-                    } else {
-                        break;
-                    }
-                }
-            }
-
-            for (int i = 0; i < matrix[0].length; i++) {
-                for (int j = 0; j < matrix.length; j++) {
-                    if (matrix[j][i] == ' ') continue;
-                    else {
-                        bld2.append(matrix[j][i]);
-                        t++;
-                    }
+                } else if (encode) {
+                    break;
                 }
 
-                if (i < (matrix[0].length - 1)) {
-                    bld2.append(" ");
-                }
-            }
-        } else {
-            t = -1;
-            for (int i = 0; i < matrix.length; i++) {
-                for (int j = 0; j < matrix[0].length; j++) {
+                // --- decode ---
+                if (t < n && s.charAt(t) != ' ') {
+                    matrix[i][j] = s.charAt(t);
                     t++;
 
-                    if (t < n && s.charAt(t) != ' ') {
-                        matrix[i][j] = s.charAt(t);
-                    } else if (j == matrix[0].length - 1) {
-                        break;
-                    } else {
-                        j--;
-                    }
+                } else if (j == y - 1) {
+                    t++;
+                    break;
+
+                } else {
+                    t++;
+                    j--;
+                }
+            }
+        }
+
+        // creating a new string
+        StringBuilder bld2 = new StringBuilder();
+        for (int i = 0; i < y; i++) {
+            for (int j = 0; j < x; j++) {
+                if (matrix[j][i] != ' ') {
+                    bld2.append(matrix[j][i]);
                 }
             }
 
-            for (int i = 0; i < matrix[0].length; i++) {
-                for (int j = 0; j < matrix.length; j++) {
-                    if (matrix[j][i] != ' ') {
-                        bld2.append(matrix[j][i]);
-                    }
-                }
+            if (i < (y - 1) && encode) {
+                bld2.append(" ");
             }
         }
 
         return bld2.toString();
     }
-
 }
