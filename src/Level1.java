@@ -8,44 +8,89 @@ public class Level1 {
                 bld.append(ca[i]);
             }
         }
-
         String str = bld.toString();
-        int n = str.length();
+
+        int n;
+        if (encode) {
+            n = str.length();
+        } else {
+            n = s.length();
+        }
 
         double sq = Math.sqrt(n);
+        int x, y;
+        int isq = (int) sq;
 
-        int x = (int) sq;
-        int y = (int) (sq + 1);
+        if (sq == isq) {
+            x = y = isq;
+        } else {
+            x = isq;
+            y = isq + 1;
+        }
 
         if ((x * y) < n) x++;
 
         char[][] matrix = new char[x][y];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                matrix[i][j] = ' ';
+            }
+        }
 
         int t = 0;
-
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[0].length; j++) {
-                matrix[i][j] = str.charAt(t);
-                t++;
-
-                if (t == n) break;
-            }
-
-            if (t == n) break;
-        }
-
         StringBuilder bld2 = new StringBuilder();
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[0].length; j++) {
-                bld2.append(matrix[j][i]);
+
+        if (encode) {
+            for (int i = 0; i < matrix.length; i++) {
+                for (int j = 0; j < matrix[0].length; j++) {
+                    if (t < n) {
+                        matrix[i][j] = str.charAt(t);
+                        t++;
+                    } else {
+                        break;
+                    }
+                }
             }
 
-            bld2.append(" ");
+            for (int i = 0; i < matrix[0].length; i++) {
+                for (int j = 0; j < matrix.length; j++) {
+                    if (matrix[j][i] == ' ') continue;
+                    else {
+                        bld2.append(matrix[j][i]);
+                        t++;
+                    }
+                }
+
+                if (i < (matrix[0].length - 1)) {
+                    bld2.append(" ");
+                }
+            }
+        } else {
+            t = -1;
+            for (int i = 0; i < matrix.length; i++) {
+                for (int j = 0; j < matrix[0].length; j++) {
+                    t++;
+
+                    if (t < n && s.charAt(t) != ' ') {
+                        matrix[i][j] = s.charAt(t);
+                    } else if (j == matrix[0].length - 1) {
+                        break;
+                    } else {
+                        j--;
+                    }
+                }
+            }
+
+            for (int i = 0; i < matrix[0].length; i++) {
+                for (int j = 0; j < matrix.length; j++) {
+                    if (matrix[j][i] != ' ') {
+                        bld2.append(matrix[j][i]);
+                    }
+                }
+            }
         }
 
-        String strFin = bld2.toString();
-
-        return strFin;
+        return bld2.toString();
     }
 
 }
