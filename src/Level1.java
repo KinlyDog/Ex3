@@ -19,13 +19,13 @@ public class Level1 {
             n = s.length();
         }
 
-        // sqrt for matrix length
+        // sqrt for matrixRabbitDecoder length
         double sq = Math.sqrt(n);
         int x;
         int y;
         int isq = (int) sq;
 
-        // matrix size
+        // matrixRabbitDecoder size
         if (sq == isq) {
             x = y = isq;
         } else {
@@ -35,11 +35,11 @@ public class Level1 {
 
         if ((x * y) < n) x++;
 
-        // new matrix
-        char[][] matrix = new char[x][y];
+        // new matrixRabbitDecoder
+        char[][] matrixRabbitDecoder = new char[x][y];
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
-                matrix[i][j] = ' ';
+                matrixRabbitDecoder[i][j] = ' ';
             }
         }
 
@@ -48,7 +48,7 @@ public class Level1 {
             for (int j = 0; j < y; j++) {
                 // --- encode ---
                 if (t < n && encode) {
-                    matrix[i][j] = str.charAt(t);
+                    matrixRabbitDecoder[i][j] = str.charAt(t);
                     t++;
                     continue;
 
@@ -58,7 +58,7 @@ public class Level1 {
 
                 // --- decode ---
                 if (t < n && s.charAt(t) != ' ') {
-                    matrix[i][j] = s.charAt(t);
+                    matrixRabbitDecoder[i][j] = s.charAt(t);
                     t++;
 
                 } else if (j == y - 1) {
@@ -76,8 +76,8 @@ public class Level1 {
         StringBuilder bld2 = new StringBuilder();
         for (int i = 0; i < y; i++) {
             for (int j = 0; j < x; j++) {
-                if (matrix[j][i] != ' ') {
-                    bld2.append(matrix[j][i]);
+                if (matrixRabbitDecoder[j][i] != ' ') {
+                    bld2.append(matrixRabbitDecoder[j][i]);
                 }
             }
 
