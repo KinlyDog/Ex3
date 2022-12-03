@@ -2,14 +2,14 @@ public class Level1 {
     public static String TheRabbitsFoot(String s, boolean encode) {
         // removing spaces
         char[] ca = s.toCharArray();
-        StringBuilder bld = new StringBuilder();
+        StringBuilder noSpaces = new StringBuilder();
 
         for (int i = 0; i < ca.length; i++) {
             if (ca[i] != ' ') {
-                bld.append(ca[i]);
+                noSpaces.append(ca[i]);
             }
         }
-        String str = bld.toString();
+        String str = noSpaces.toString();
 
         // string length
         int n;
