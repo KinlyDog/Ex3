@@ -12,28 +12,28 @@ public class Level1 {
         String str = noSpaces.toString();
 
         // string length
-        int n;
+        final int STRING_LENGTH;
         if (encode) {
-            n = str.length();
+            STRING_LENGTH = str.length();
         } else {
-            n = s.length();
+            STRING_LENGTH = s.length();
         }
 
         // sqrt for matrixRabbitDecoder length
-        double sq = Math.sqrt(n);
+        final double SQRT_FROM_LENGTH = Math.sqrt(STRING_LENGTH);
         int x;
         int y;
-        int isq = (int) sq;
+        final int INT_FROM_SQRT = (int) SQRT_FROM_LENGTH;
 
         // matrixRabbitDecoder size
-        if (sq == isq) {
-            x = y = isq;
+        if (SQRT_FROM_LENGTH == INT_FROM_SQRT) {
+            x = y = INT_FROM_SQRT;
         } else {
-            x = isq;
-            y = isq + 1;
+            x = INT_FROM_SQRT;
+            y = INT_FROM_SQRT + 1;
         }
 
-        if ((x * y) < n) x++;
+        if ((x * y) < STRING_LENGTH) x++;
 
         // new matrixRabbitDecoder
         char[][] matrixRabbitDecoder = new char[x][y];
@@ -47,7 +47,7 @@ public class Level1 {
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
                 // --- encode ---
-                if (t < n && encode) {
+                if (t < STRING_LENGTH && encode) {
                     matrixRabbitDecoder[i][j] = str.charAt(t);
                     t++;
                     continue;
@@ -57,7 +57,7 @@ public class Level1 {
                 }
 
                 // --- decode ---
-                if (t < n && s.charAt(t) != ' ') {
+                if (t < STRING_LENGTH && s.charAt(t) != ' ') {
                     matrixRabbitDecoder[i][j] = s.charAt(t);
                     t++;
 
