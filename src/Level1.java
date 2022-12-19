@@ -1,14 +1,15 @@
 public class Level1 {
     public static String TheRabbitsFoot(String s, boolean encode) {
         // removing spaces
-        char[] ca = s.toCharArray();
+        char[] stringToChar = s.toCharArray();
         StringBuilder noSpaces = new StringBuilder();
 
-        for (int i = 0; i < ca.length; i++) {
-            if (ca[i] != ' ') {
-                noSpaces.append(ca[i]);
+        for (int i = 0; i < stringToChar.length; i++) {
+            if (stringToChar[i] != ' ') {
+                noSpaces.append(stringToChar[i]);
             }
         }
+        stringToChar = null;
         String str = noSpaces.toString();
 
         // string length
@@ -43,13 +44,13 @@ public class Level1 {
             }
         }
 
-        int t = 0;
+        int count = 0;
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
                 // --- encode ---
-                if (t < STRING_LENGTH && encode) {
-                    matrixRabbitDecoder[i][j] = str.charAt(t);
-                    t++;
+                if (count < STRING_LENGTH && encode) {
+                    matrixRabbitDecoder[i][j] = str.charAt(count);
+                    count++;
                     continue;
 
                 } else if (encode) {
@@ -57,20 +58,21 @@ public class Level1 {
                 }
 
                 // --- decode ---
-                if (t < STRING_LENGTH && s.charAt(t) != ' ') {
-                    matrixRabbitDecoder[i][j] = s.charAt(t);
-                    t++;
+                if (count < STRING_LENGTH && s.charAt(count) != ' ') {
+                    matrixRabbitDecoder[i][j] = s.charAt(count);
+                    count++;
 
                 } else if (j == y - 1) {
-                    t++;
+                    count++;
                     break;
 
                 } else {
-                    t++;
+                    count++;
                     j--;
                 }
             }
         }
+        count = 0;
 
         // creating a new string
         StringBuilder bld2 = new StringBuilder();
