@@ -4,12 +4,12 @@ public class Level1 {
         char[] stringToChar = s.toCharArray();
         StringBuilder noSpaces = new StringBuilder();
 
-        for (int i = 0; i < stringToChar.length; i++) {
-            if (stringToChar[i] != ' ') {
-                noSpaces.append(stringToChar[i]);
+        for (char c : stringToChar) {
+            if (c != ' ') {
+                noSpaces.append(c);
             }
         }
-        stringToChar = null;
+
         String str = noSpaces.toString();
 
         // string length
@@ -72,7 +72,6 @@ public class Level1 {
                 }
             }
         }
-        count = 0;
 
         // creating a new string
         StringBuilder bld2 = new StringBuilder();
